@@ -43,7 +43,7 @@
                              [style.margin.px]=imageMargin>
                     </td>
                     <td>{{item.productName}}</td>
-                    <td>{{item.productCode | lowercase}}</td>
+                    <td>{{item.productCode | lowercase | convertToSpaces:'-'}}</td>
                     <td>{{item.releaseDate}}</td>
                     <td>{{item.price | currency:'USD':'symbol':'1.2-2' }}</td>
                     <td>{{item.starRating}}</td>
