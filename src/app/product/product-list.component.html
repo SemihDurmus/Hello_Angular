@@ -46,7 +46,7 @@
                     <td>{{item.productCode | lowercase | convertToSpaces:'-'}}</td>
                     <td>{{item.releaseDate}}</td>
                     <td>{{item.price | currency:'USD':'symbol':'1.2-2' }}</td>
-                    <td>{{item.starRating}}</td>
+                    <td><pm-star [rating]='item.starRating'></pm-star></td>
 
                 </tr>
             </tbody>
