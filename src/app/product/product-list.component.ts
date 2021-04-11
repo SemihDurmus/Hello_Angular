@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Iproduct } from './product';
 @Component({
@@ -17,7 +18,7 @@ export class ProductListComponent implements OnInit {
   }
   set listFilter(value: string) {
     this._listFilter = value;
-    console.log('In setter : ', value);
+    //console.log('In setter : ', value);
     this.filteredProducts = this.performFilter(value);
   }
   filteredProducts: Iproduct[] = [];
@@ -86,5 +87,8 @@ export class ProductListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.listFilter = 'cart';
+  }
+  onRatingClicked(message:string):void {
+    this.pageTitle = 'Product List : ' + message;
   }
 }
