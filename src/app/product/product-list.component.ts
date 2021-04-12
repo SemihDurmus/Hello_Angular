@@ -7,14 +7,12 @@ import { ProductService } from './product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-
-
 export class ProductListComponent implements OnInit {
-
   pageTitle: string = 'Product List';
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
+  errorMessage: string = '';
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -27,11 +25,9 @@ export class ProductListComponent implements OnInit {
   }
   filteredProducts: Iproduct[] = [];
 
-  products: Iproduct[] = [
-    
-  ];
+  products: Iproduct[] = [];
 
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService) {}
 
   performFilter(filterBy: string): Iproduct[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -43,10 +39,15 @@ export class ProductListComponent implements OnInit {
     this.showImage = !this.showImage;
   }
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error: (err) => (this.errorMessage = err),
+    });
   }
-  onRatingClicked(message:string):void {
+  onRatingClicked(message: string): void {
     this.pageTitle = 'Product List : ' + message;
   }
 }
